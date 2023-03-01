@@ -6,9 +6,8 @@ import {
   signOut,
   onAuthStateChanged,
 } from "firebase/auth";
-import { setDoc, doc } from "firebase/firestore";
 
-const AuthContext = createContext();
+export const GlobalContext = createContext();
 
 export function AuthContextProvider({ children }) {
   const [user, setUser] = useState({});
@@ -35,12 +34,12 @@ export function AuthContextProvider({ children }) {
   });
 
   return (
-    <AuthContext.Provider value={{ signUp, logIn, logOut, user }}>
+    <GlobalContext.Provider value={{ signUp, logIn, logOut, user }}>
       {children}
-    </AuthContext.Provider>
+    </GlobalContext.Provider>
   );
 }
 
 export function UserAuth() {
-  return useContext(AuthContext);
+  return useContext(GlobalContext);
 }
